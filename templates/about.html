@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Personal Website</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #e0b0ff; color: #0a174e; }
+        .navbar {
+            background: transparent;
+            padding: 1em;
+            display: flex;
+            gap: 1em;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-title {
+            color: #0a174e;
+            font-weight: 400;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 1em;
+        }
+        .navbar a {
+            color: #0a174e;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            font-weight: 300;
+        }
+        .navbar a:hover {
+            background: none;
+            color: #a259c6;
+            text-decoration: none;
+        }
+        h1 {
+            color: #0a174e;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-title">Milan R Shah</span>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/blog">Blog</a>
+        </div>
+    </nav>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2em; min-height: 60vh;">
+        <h1>About</h1>
+        <p>This is the About page for Milan R Shah.</p>
+    </div>
+</body>
+</html> 
