@@ -1,0 +1,114 @@
+.qb-rankings-container {
+  margin-top: 2rem;
+}
+
+.tabs-container {
+  margin-bottom: 2rem;
+}
+
+.year-tabs, .week-tabs {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tab-label {
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 40px;
+}
+
+.year-tabs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.week-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #64748b;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.tab-btn:hover {
+  color: #1e3a8a;
+}
+
+.tab-btn.active {
+  color: #1e3a8a;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1e3a8a;
+}
+
+.rankings-content {
+  margin-top: 2rem;
+}
+
+.ranking-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.move-indicator {
+  width: 60px;
+  text-align: left;
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+.ranking-number {
+  width: 30px;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-right: 1rem;
+}
+
+.player-name {
+  flex: 1;
+  color: #374151;
+}
+
+.move-up {
+  color: #059669;
+}
+
+.move-down {
+  color: #dc2626;
+}
+
+.move-same {
+  color: #6b7280;
+}
+
+.move-new {
+  color: #1e3a8a;
+  font-weight: 600;
+} 
