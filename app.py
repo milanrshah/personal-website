@@ -192,7 +192,7 @@ def get_comments(week):
                 ':week': week,
                 ':prefix': 'comment_'
             },
-            ScanIndexForward=False  # Most recent first
+            ScanIndexForward=True  # Oldest first
         )
         
         comments = response.get('Items', [])
