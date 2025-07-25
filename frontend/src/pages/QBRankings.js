@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
+import Comments from '../components/Comments';
 import '../styles/common.css';
 import './QBRankings.css';
 
@@ -197,6 +198,12 @@ function QBRankings() {
     ));
   };
 
+  // Create week identifier for comments (format: "2024-01" for year 2024, week 1)
+  const getWeekIdentifier = () => {
+    if (!selectedYear || !selectedWeek) return null;
+    return `${selectedYear}-${selectedWeek.padStart(2, '0')}`;
+  };
+
   return (
     <div className="page-container">
       <Navbar />
@@ -217,6 +224,11 @@ function QBRankings() {
             {renderRankings()}
           </div>
         </div>
+        
+        {/* Comments Section */}
+        {getWeekIdentifier() && (
+          <Comments week={getWeekIdentifier()} />
+        )}
       </div>
     </div>
   );
