@@ -18,22 +18,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Debug EC2 Host
+      - name: Debug SSH Setup
         run: |
-          echo "Attempting to connect to EC2 host: ${{ secrets.EC2_HOST }}"
-
-      - name: Add EC2 to known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-          cat ~/.ssh/known_hosts
+          echo "Setting up SSH connection..."
+          echo "EC2 Host: ${{ secrets.EC2_HOST }}"
+          ssh-add -l
+          echo "Testing SSH connection..."
+          ssh -o StrictHostKeyChecking=no -vvv ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'echo "SSH connection successful"'
 
       - name: Deploy to EC2
         env:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          ssh $EC2_USER@$EC2_HOST 'bash -s' << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'bash -s' << 'ENDSSH'
             # Navigate to project directory (with correct path)
             cd /home/ubuntu/personal-website/personal-website
 
