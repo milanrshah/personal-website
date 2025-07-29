@@ -412,6 +412,13 @@ def unlike_comment(week, comment_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/deployment-test')
+def deployment_test():
+    return jsonify({
+        'message': 'Automatic deployment is working!',
+        'timestamp': datetime.utcnow().isoformat()
+    })
+
 if __name__ == '__main__':
     app.run(
         debug=config.DEBUG, 
