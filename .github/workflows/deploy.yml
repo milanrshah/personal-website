@@ -18,10 +18,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+      - name: Debug EC2 Host
+        run: |
+          echo "Attempting to connect to EC2 host: ${{ secrets.EC2_HOST }}"
+
       - name: Add EC2 to known hosts
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         env:
@@ -29,8 +34,8 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
           ssh $EC2_USER@$EC2_HOST 'bash -s' << 'ENDSSH'
-            # Navigate to project directory
-            cd /home/ubuntu/personal-website
+            # Navigate to project directory (with correct path)
+            cd /home/ubuntu/personal-website/personal-website
 
             # Pull latest changes
             git pull
