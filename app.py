@@ -9,34 +9,32 @@ import uuid
 import requests
 from datetime import datetime, timedelta
 from functools import wraps
+from config import get_config
 
 # Load environment variables
 load_dotenv()
 
-app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default-secret-key-change-this')
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Get configuration based on environment
+config = get_config()
 
-# Database configuration using environment variables
-DB_CONFIG = {
-    'host': os.getenv('DB_HOST', 'personal-website-db.cb002k6es5bn.us-east-2.rds.amazonaws.com'),
-    'database': os.getenv('DB_NAME', 'personal_website'),
-    'user': os.getenv('DB_USER', 'admin'),
-    'password': os.getenv('DB_PASSWORD'),  # Required from environment
-    'port': int(os.getenv('DB_PORT', 3306))
-}
+app = Flask(__name__)
+app.config.from_object(config)
+CORS(app, resources={r"/*": {"origins": config.CORS_ORIGINS}})
+
+# Database configuration using config
+DB_CONFIG = config.DATABASE_CONFIG
 
 # AWS DynamoDB setup for comments
 dynamodb = boto3.resource('dynamodb',
-    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
-    region_name=os.getenv('AWS_REGION', 'us-east-1')
+    aws_access_key_id=config.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
+    region_name=config.AWS_REGION
 )
 
-comments_table = dynamodb.Table(os.getenv('DYNAMODB_TABLE_NAME', 'nfl-qb-comments'))
+comments_table = dynamodb.Table(config.DYNAMODB_TABLE_NAME)
 
 # Google OAuth configuration
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_ID = config.GOOGLE_CLIENT_ID
 
 # Authentication helper functions
 def create_jwt_token(user_info):
@@ -48,12 +46,12 @@ def create_jwt_token(user_info):
         'picture': user_info.get('picture', ''),
         'exp': datetime.utcnow() + timedelta(days=7)
     }
-    return jwt.encode(payload, app.secret_key, algorithm='HS256')
+    return jwt.encode(payload, config.SECRET_KEY, algorithm='HS256')
 
 def verify_jwt_token(token):
     """Verify JWT token and return user info"""
     try:
-        payload = jwt.decode(token, app.secret_key, algorithms=['HS256'])
+        payload = jwt.decode(token, config.SECRET_KEY, algorithms=['HS256'])
         return payload
     except jwt.ExpiredSignatureError:
         return None
@@ -415,4 +413,8 @@ def unlike_comment(week, comment_id):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True, port=5001) 
+    app.run(
+        debug=config.DEBUG, 
+        host='0.0.0.0', 
+        port=int(os.getenv('PORT', 5000))
+    ) 
