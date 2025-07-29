@@ -31,34 +31,4 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-          set -e
-          cd /home/ubuntu/personal-website/personal-website
-
-          # Pull latest changes
-          git pull
-
-          # Create virtual environment if it doesn't exist
-          if [ ! -d "venv" ]; then
-            echo "Creating virtual environment..."
-            sudo apt-get update
-            sudo apt-get install -y python3-venv
-            python3 -m venv venv
-          fi
-
-          # Activate virtual environment and install dependencies
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt --break-system-packages
-
-          # Copy production environment file if it doesn't exist
-          if [ ! -f .env.production ]; then
-            cp .env.example .env.production
-          fi
-
-          # Restart the Flask application
-          sudo systemctl restart flask-app
-
-          # Check service status
-          sudo systemctl status flask-app --no-pager
-          EOF 
+          ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'cd /home/ubuntu/personal-website/personal-website && git pull && if [ ! -d "venv" ]; then echo "Creating virtual environment..." && sudo apt-get update && sudo apt-get install -y python3-venv && python3 -m venv venv; fi && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt --break-system-packages && if [ ! -f .env.production ]; then cp .env.example .env.production; fi && sudo systemctl restart flask-app && sudo systemctl status flask-app --no-pager' 
