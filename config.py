@@ -25,7 +25,7 @@ class Config:
     TESTING = False
     
     # Database configuration
-    DB_HOST = os.getenv('DB_HOST', 'personal-website-db.cb002k6es5bn.us-east-2.rds.amazonaws.com')
+    DB_HOST = os.getenv('DB_HOST', 'personal-website-db.c8z4qma8qrt9.us-east-1.rds.amazonaws.com')
     DB_NAME = os.getenv('DB_NAME', 'personal_website')
     DB_USER = os.getenv('DB_USER', 'admin')
     DB_PASSWORD = os.getenv('DB_PASSWORD')
