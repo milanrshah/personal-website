@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Load production environment file if FLASK_ENV is production
+if os.getenv('FLASK_ENV') == 'production':
+    load_dotenv('.env.production')
+
 class Config:
     """Base configuration class"""
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY', 'default-secret-key-change-this')
@@ -64,7 +68,7 @@ class TestingConfig(Config):
     CORS_ORIGINS = ['http://localhost:3000']
 
 # Configuration dictionary
-config = {
+config_dict = {
     'development': DevelopmentConfig,
     'production': ProductionConfig,
     'testing': TestingConfig,
@@ -74,5 +78,5 @@ config = {
 def get_config():
     """Get configuration based on environment"""
     env = os.getenv('FLASK_ENV', 'development')
-    config_class = config.get(env, config['default'])
+    config_class = config_dict.get(env, config_dict['default'])
     return config_class() 
