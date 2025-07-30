@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
 
+# Debug: Print what environment we're in
+print(f"FLASK_ENV detected: '{os.getenv('FLASK_ENV')}'")
+
 # Load production environment file if FLASK_ENV is production
 if os.getenv('FLASK_ENV') == 'production':
     load_dotenv('.env.production')
