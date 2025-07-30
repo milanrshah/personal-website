@@ -53,8 +53,8 @@ class ProductionConfig(Config):
     DEBUG = False
     CORS_ORIGINS = [
         'http://localhost:3000',  # For local testing
-        'https://your-amplify-url.amplifyapp.com',  # Replace with your Amplify URL
-        'https://your-domain.com'  # Replace with your custom domain
+        'https://*.amplifyapp.com',  # For Amplify default domain
+        'https://your-custom-domain.com'  # Replace with your custom domain if you have one
     ]
 
 class TestingConfig(Config):
