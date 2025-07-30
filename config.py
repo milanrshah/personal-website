@@ -71,7 +71,9 @@ class ProductionConfig(Config):
     CORS_ORIGINS = [
         'http://localhost:3000',  # For local testing
         'https://*.amplifyapp.com',  # For Amplify default domain
-        'https://your-custom-domain.com'  # Replace with your custom domain if you have one
+        'https://main.d3oti3u8xtd2h3.amplifyapp.com',  # Your specific Amplify domain
+        'https://your-custom-domain.com',  # Replace with your custom domain if you have one
+        '*'  # Allow all origins for testing (remove this in production)
     ]
 
 class TestingConfig(Config):
