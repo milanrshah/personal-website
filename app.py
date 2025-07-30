@@ -419,6 +419,29 @@ def deployment_test():
         'timestamp': datetime.utcnow().isoformat()
     })
 
+@app.route('/api/db-test')
+def db_test():
+    """Test database connection"""
+    try:
+        print(f"DB Config: {DB_CONFIG}")
+        conn = mysql.connector.connect(**DB_CONFIG)
+        print("Database connection successful")
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return jsonify({
+            'message': 'Database connection successful',
+            'test_result': result[0] if result else None
+        })
+    except Exception as e:
+        print(f"Database error: {e}")
+        return jsonify({
+            'error': str(e),
+            'db_config': {k: v if k != 'password' else '***' for k, v in DB_CONFIG.items()}
+        }), 500
+
 if __name__ == '__main__':
     app.run(
         debug=config.DEBUG, 
