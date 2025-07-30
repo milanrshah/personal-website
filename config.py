@@ -4,8 +4,11 @@ from dotenv import load_dotenv
 # Load production environment file if FLASK_ENV is production
 if os.getenv('FLASK_ENV') == 'production':
     load_dotenv('.env.production')
+    print(f"Loading production environment from .env.production")
+    print(f"DB_PASSWORD from env: '{os.getenv('DB_PASSWORD')}'")
 else:
     load_dotenv()
+    print(f"Loading development environment from .env")
 
 class Config:
     """Base configuration class"""
@@ -19,6 +22,9 @@ class Config:
     DB_USER = os.getenv('DB_USER', 'admin')
     DB_PASSWORD = os.getenv('DB_PASSWORD')
     DB_PORT = int(os.getenv('DB_PORT', 3306))
+    
+    # Debug output
+    print(f"All DB env vars: DB_HOST: '{DB_HOST}', DB_NAME: '{DB_NAME}', DB_USER: '{DB_USER}', DB_PASSWORD: '{DB_PASSWORD}', DB_PORT: '{DB_PORT}'")
     
     # AWS configuration
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
@@ -77,5 +83,5 @@ config_dict = {
 def get_config():
     """Get configuration based on environment"""
     env = os.getenv('FLASK_ENV', 'development')
-    config_class = config_dict.get(config_dict[env], config_dict['default'])
+    config_class = config_dict.get(env, config_dict['default'])
     return config_class() 
