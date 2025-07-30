@@ -1,12 +1,11 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
-
 # Load production environment file if FLASK_ENV is production
 if os.getenv('FLASK_ENV') == 'production':
     load_dotenv('.env.production')
+else:
+    load_dotenv()
 
 class Config:
     """Base configuration class"""
