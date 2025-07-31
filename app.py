@@ -189,14 +189,16 @@ def get_comments(week):
             ExpressionAttributeValues={
                 ':week': week,
                 ':prefix': 'comment_'
-            },
-            ScanIndexForward=True  # Oldest first
+            }
         )
         
         comments = response.get('Items', [])
         
         # Filter out replies (comments with parentCommentId) from the main list
         top_level_comments = [comment for comment in comments if 'parentCommentId' not in comment]
+        
+        # Sort top-level comments by timestamp (oldest first)
+        top_level_comments.sort(key=lambda x: x.get('timestamp', ''))
         
         # Get replies for each top-level comment
         for comment in top_level_comments:
@@ -205,10 +207,12 @@ def get_comments(week):
                 KeyConditionExpression='parentCommentId = :parentId',
                 ExpressionAttributeValues={
                     ':parentId': comment['commentId']
-                },
-                ScanIndexForward=True  # Oldest first for replies
+                }
             )
-            comment['replies'] = replies_response.get('Items', [])
+            replies = replies_response.get('Items', [])
+            # Sort replies by timestamp (oldest first)
+            replies.sort(key=lambda x: x.get('timestamp', ''))
+            comment['replies'] = replies
         
         return jsonify({'comments': top_level_comments})
         
