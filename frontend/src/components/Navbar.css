@@ -49,6 +49,20 @@
   color: #1e3a8a;
 }
 
+.navbar span {
+  color: #374151;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar span:hover {
+  color: #1e3a8a;
+}
+
 /* Remove the underline animation for active state */
 /* .navbar a.active::after {
   content: '';

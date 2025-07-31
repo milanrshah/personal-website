@@ -88,10 +88,6 @@ def home_page():
 def about():
     return render_template('about.html')
 
-@app.route('/blog')
-def blog():
-    return render_template('blog.html')
-
 @app.route('/test')
 def test():
     return jsonify({'message': 'Flask is working!'})

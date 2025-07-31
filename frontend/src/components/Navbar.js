@@ -15,9 +15,9 @@ function Navbar() {
           Projects
         </Link>
         <div className="dropdown">
-          <Link to="/blog" className={`dropdown-toggle ${location.pathname.startsWith('/blog') ? 'active' : ''}`}>
+          <span className="dropdown-toggle">
             Blog ▼
-          </Link>
+          </span>
           <div className="dropdown-menu">
             <Link to="/blog/qb-rankings" className="dropdown-item">
               NFL QB Rankings
