@@ -7,12 +7,14 @@ function Home() {
     <div className="page-container">
       <Navbar />
       <div className="page-content">
-        <h1 className="page-title">Milan R Shah</h1>
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <img 
-            src="https://via.placeholder.com/300x200?text=Welcome" 
-            alt="Welcome" 
-            style={{ maxWidth: '100%', borderRadius: '8px' }}
+            src="/assets/wizard-programmer.png" 
+            alt="Wizard Programmer" 
+            style={{ 
+              maxWidth: '400px', 
+              width: '100%'
+            }}
           />
         </div>
       </div>

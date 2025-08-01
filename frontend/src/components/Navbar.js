@@ -9,7 +9,15 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-buttons">
         <Link to="/" className="navbar-title">
-          milanrshah
+          <img 
+            src="/assets/wizard-programmer.png" 
+            alt="Milan R Shah" 
+            style={{ 
+              height: '32px', 
+              width: 'auto',
+              verticalAlign: 'middle'
+            }}
+          />
         </Link>
         <Link to="/projects" className={location.pathname === '/projects' ? 'active' : ''}>
           Projects

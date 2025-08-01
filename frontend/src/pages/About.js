@@ -8,14 +8,29 @@ function About() {
       <Navbar />
       <div className="page-content">
         <h1 className="page-title">About</h1>
-        <p className="page-text">
-          Welcome to my personal website! I'm passionate about technology, innovation, and creating meaningful solutions. 
-          This space serves as a platform to share my thoughts, projects, and experiences.
-        </p>
-        <p className="page-text">
-          I believe in continuous learning and pushing the boundaries of what's possible. 
-          Whether it's through coding, writing, or collaboration, I'm always excited to explore new ideas and share them with others.
-        </p>
+        <div style={{ 
+          textAlign: 'center',
+          marginTop: '3rem'
+        }}>
+          <p style={{ 
+            fontSize: '1.2rem',
+            marginBottom: '0.5rem'
+          }}>
+            Software Engineer (aka Wizard on the Keys)
+          </p>
+          <p style={{ 
+            fontSize: '1rem',
+            marginBottom: '0.5rem'
+          }}>
+            nyc
+          </p>
+          <p style={{ 
+            fontSize: '1rem',
+            marginBottom: '0'
+          }}>
+            hobbies: <span style={{ fontSize: '1.1rem' }}>✈️ 🎾 🏈 🏀 🏃‍♂️ ⛳ 📚 🎬</span>
+          </p>
+        </div>
       </div>
     </div>
   );

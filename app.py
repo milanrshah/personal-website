@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mysql.connector
 import os
@@ -80,18 +80,6 @@ def require_auth(f):
 def home():
     return jsonify({'message': 'Flask API is working!', 'status': 'success'})
 
-@app.route('/home')
-def home_page():
-    return render_template('index.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/test')
-def test():
-    return jsonify({'message': 'Flask is working!'})
-
 @app.route('/blog/qb-rankings/data')
 def qb_rankings_data():
     year = request.args.get('year', type=int)
@@ -118,10 +106,6 @@ def qb_rankings_data():
     except Exception as e:
         print(f"Database error: {e}")
         return jsonify({'error': str(e)}), 500
-
-@app.route('/blog/qb-rankings')
-def qb_rankings():
-    return render_template('qb_rankings.html')
 
 # Comments API routes
 @app.route('/api/auth/google', methods=['POST'])
@@ -411,36 +395,6 @@ def unlike_comment(week, comment_id):
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-@app.route('/api/deployment-test')
-def deployment_test():
-    return jsonify({
-        'message': 'Automatic deployment is working!',
-        'timestamp': datetime.utcnow().isoformat()
-    })
-
-@app.route('/api/db-test')
-def db_test():
-    """Test database connection"""
-    try:
-        print(f"DB Config: {DB_CONFIG}")
-        conn = mysql.connector.connect(**DB_CONFIG)
-        print("Database connection successful")
-        cursor = conn.cursor()
-        cursor.execute("SELECT 1")
-        result = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        return jsonify({
-            'message': 'Database connection successful',
-            'test_result': result[0] if result else None
-        })
-    except Exception as e:
-        print(f"Database error: {e}")
-        return jsonify({
-            'error': str(e),
-            'db_config': {k: v if k != 'password' else '***' for k, v in DB_CONFIG.items()}
-        }), 500
 
 if __name__ == '__main__':
     app.run(
