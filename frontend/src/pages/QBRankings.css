@@ -111,4 +111,24 @@
 .move-new {
   color: #1e3a8a;
   font-weight: 600;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .week-tabs {
+    gap: 0.25rem;
+  }
+  
+  .tab-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .year-tabs {
+    gap: 0.5rem;
+  }
+  
+  .tab-label {
+    font-size: 0.8rem;
+  }
 } 

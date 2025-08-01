@@ -13,22 +13,24 @@ function About() {
           marginTop: '3rem'
         }}>
           <p style={{ 
-            fontSize: '1.2rem',
-            marginBottom: '0.5rem'
+            fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)',
+            marginBottom: '0.5rem',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word'
           }}>
             Software Engineer (aka Wizard on the Keys)
           </p>
           <p style={{ 
-            fontSize: '1rem',
+            fontSize: 'clamp(0.8rem, 2vw, 1rem)',
             marginBottom: '0.5rem'
           }}>
             nyc
           </p>
           <p style={{ 
-            fontSize: '1rem',
+            fontSize: 'clamp(0.8rem, 2vw, 1rem)',
             marginBottom: '0'
           }}>
-            hobbies: <span style={{ fontSize: '1.1rem' }}>✈️ 🎾 🏈 🏀 🏃‍♂️ ⛳ 📚 🎬</span>
+            hobbies: <span style={{ fontSize: 'clamp(0.9rem, 2.2vw, 1.1rem)' }}>✈️ 🎾 🏈 🏀 🏃‍♂️ ⛳ 📚 🎬</span>
           </p>
         </div>
       </div>
