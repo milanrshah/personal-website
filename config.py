@@ -72,7 +72,8 @@ class ProductionConfig(Config):
         'http://localhost:3000',  # For local testing
         'https://*.amplifyapp.com',  # For Amplify default domain
         'https://main.d3oti3u8xtd2h3.amplifyapp.com',  # Your specific Amplify domain
-        'https://your-custom-domain.com',  # Replace with your custom domain if you have one
+        'https://www.milanrs.com',  # Your custom domain
+        'https://milanrs.com',  # Your custom domain without www
         '*'  # Allow all origins for testing (remove this in production)
     ]
 
