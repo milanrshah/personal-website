@@ -80,15 +80,51 @@ const Auth = () => {
             shape="square"
           />
         </div>
-      ) : (
-        <div className="user-navbar">
-          <div className="user-dropdown">
+              ) : (
+          <div className="user-navbar">
+            <div className="user-dropdown">
             <img 
-              src={user.picture || '/default-avatar.png'} 
+              src={user.picture}
               alt={user.name}
               className="user-avatar-navbar"
               onClick={() => setShowDropdown(!showDropdown)}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+              onLoad={(e) => {
+                e.target.nextSibling.style.display = 'none';
+              }}
+              style={{ 
+                width: '32px !important',
+                height: '32px !important',
+                borderRadius: '50% !important',
+                border: '2px solid #F2F0EF !important',
+                cursor: 'pointer !important',
+                objectFit: 'cover !important',
+                display: 'block !important'
+              }}
             />
+            <div 
+              className="user-avatar-navbar"
+              onClick={() => setShowDropdown(!showDropdown)}
+              style={{ 
+                width: '32px !important',
+                height: '32px !important',
+                borderRadius: '50% !important',
+                border: '2px solid #F2F0EF !important',
+                cursor: 'pointer !important',
+                backgroundColor: '#374151 !important',
+                display: 'none !important',
+                alignItems: 'center !important',
+                justifyContent: 'center !important',
+                color: '#F2F0EF !important',
+                fontSize: '14px !important',
+                fontWeight: 'bold !important'
+              }}
+            >
+              {user.name.charAt(0).toUpperCase()}
+            </div>
             {showDropdown && (
               <div className="user-dropdown-menu">
                 <div className="user-dropdown-item">

@@ -91,7 +91,7 @@
     display: none;
   }
   
-  .navbar img {
+  .navbar img:not(.user-avatar-navbar) {
     display: none;
   }
   
