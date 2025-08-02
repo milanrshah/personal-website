@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
 import axios from '../config';
 import './Comments.css';
 
@@ -334,36 +333,6 @@ const Comments = ({ week }) => {
   return (
     <div className="comments-section">
       <h3 className="comments-title">Comments</h3>
-      
-      {/* Authentication Section - Moved to top */}
-      {!user ? (
-        <div className="auth-section">
-          <div className="login-section">
-            <p>Sign in to comment and like posts</p>
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleError}
-              useOneTap
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="auth-section">
-          <div className="user-section">
-            <div className="user-info">
-              <img 
-                src={user.picture || '/default-avatar.png'} 
-                alt={user.name}
-                className="user-avatar"
-              />
-              <span className="user-name">{user.name}</span>
-            </div>
-            <button onClick={handleLogout} className="logout-btn">
-              Sign Out
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Comments List */}
       <div className="comments-list">
@@ -377,7 +346,7 @@ const Comments = ({ week }) => {
       </div>
 
       {/* Comment Form - Moved to bottom */}
-      {user && (
+      {user ? (
         <form onSubmit={handleSubmitComment} className="comment-form">
           <textarea
             value={newComment}
@@ -391,6 +360,10 @@ const Comments = ({ week }) => {
             Post Comment
           </button>
         </form>
+      ) : (
+        <div className="signin-prompt">
+          <p>Sign in to comment or like posts</p>
+        </div>
       )}
     </div>
   );

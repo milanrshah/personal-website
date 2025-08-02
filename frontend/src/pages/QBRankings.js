@@ -32,7 +32,7 @@ function QBRankings() {
       console.log('Setting week from URL:', weekParam);
       setSelectedWeek(weekParam);
     } else {
-      const savedWeek = localStorage.getItem('qb_selectedWeek') || '1';
+      const savedWeek = localStorage.getItem('qb_selectedWeek') || '0';
       console.log('Setting week from localStorage:', savedWeek);
       setSelectedWeek(savedWeek);
     }
@@ -162,40 +162,76 @@ function QBRankings() {
     return <div className="rankings-text">{rankingsList}</div>;
   };
 
-  const renderYearTabs = () => {
-    return [2024, 2025].map(year => (
-      <button
-        key={year}
-        className={`tab-btn ${String(year) === selectedYear ? 'active' : ''}`}
-        onClick={() => {
-          console.log('Year clicked:', year);
-          setSelectedYear(String(year));
-          setSelectedWeek('1');
+  const renderYearDropdown = () => {
+    return (
+      <select
+        value={selectedYear}
+        onChange={(e) => {
+          console.log('Year changed:', e.target.value);
+          setSelectedYear(e.target.value);
+          setSelectedWeek('0');
           // Force save to localStorage immediately
-          localStorage.setItem('qb_selectedYear', String(year));
-          localStorage.setItem('qb_selectedWeek', '1');
+          localStorage.setItem('qb_selectedYear', e.target.value);
+          localStorage.setItem('qb_selectedWeek', '0');
+        }}
+        style={{
+          padding: '0.5rem',
+          border: '1px solid #e5e7eb',
+          borderRadius: '4px',
+          fontSize: '0.9rem',
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          backgroundColor: 'white',
+          color: '#374151',
+          cursor: 'pointer'
         }}
       >
-        {year}
-      </button>
-    ));
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+      </select>
+    );
   };
 
-  const renderWeekTabs = () => {
-    return Array.from({ length: 17 }, (_, i) => i + 1).map(week => (
-      <button
-        key={week}
-        className={`tab-btn ${String(week) === selectedWeek ? 'active' : ''}`}
-        onClick={() => {
-          console.log('Week clicked:', week);
-          setSelectedWeek(String(week));
+  const renderWeekDropdown = () => {
+    return (
+      <select
+        value={selectedWeek}
+        onChange={(e) => {
+          console.log('Week changed:', e.target.value);
+          setSelectedWeek(e.target.value);
           // Force save to localStorage immediately
-          localStorage.setItem('qb_selectedWeek', String(week));
+          localStorage.setItem('qb_selectedWeek', e.target.value);
+        }}
+        style={{
+          padding: '0.5rem',
+          border: '1px solid #e5e7eb',
+          borderRadius: '4px',
+          fontSize: '0.9rem',
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          backgroundColor: 'white',
+          color: '#374151',
+          cursor: 'pointer'
         }}
       >
-        {week}
-      </button>
-    ));
+        <option value="0">Week 0</option>
+        <option value="1">Week 1</option>
+        <option value="2">Week 2</option>
+        <option value="3">Week 3</option>
+        <option value="4">Week 4</option>
+        <option value="5">Week 5</option>
+        <option value="6">Week 6</option>
+        <option value="7">Week 7</option>
+        <option value="8">Week 8</option>
+        <option value="9">Week 9</option>
+        <option value="10">Week 10</option>
+        <option value="11">Week 11</option>
+        <option value="12">Week 12</option>
+        <option value="13">Week 13</option>
+        <option value="14">Week 14</option>
+        <option value="15">Week 15</option>
+        <option value="16">Week 16</option>
+        <option value="17">Week 17</option>
+      </select>
+    );
   };
 
   // Create week identifier for comments (format: "2024-01" for year 2024, week 1)
@@ -210,14 +246,16 @@ function QBRankings() {
       <div className="page-content">
         <h1 className="page-title">NFL QB Rankings</h1>
         <div className="qb-rankings-container">
-          <div className="tabs-container">
-            <div className="year-tabs">
-              <div className="tab-label">Year</div>
-              {renderYearTabs()}
-            </div>
-            <div className="week-tabs">
-              <div className="tab-label">Week</div>
-              {renderWeekTabs()}
+          <div className="tabs-container" style={{ textAlign: 'center' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="tab-label">Year</div>
+                {renderYearDropdown()}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="tab-label">Week</div>
+                {renderWeekDropdown()}
+              </div>
             </div>
           </div>
           <div className="rankings-content">
@@ -226,7 +264,7 @@ function QBRankings() {
         </div>
         
         {/* Comments Section */}
-        {getWeekIdentifier() && (
+        {getWeekIdentifier() && !loading && rankings && rankings.length > 0 && (
           <Comments week={getWeekIdentifier()} />
         )}
       </div>

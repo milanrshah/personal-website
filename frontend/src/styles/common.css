@@ -1,8 +1,8 @@
 /* Common page styles */
 .page-container {
   min-height: 100vh;
-  background: white;
-  padding: 0.5rem 2rem 2rem 2rem; /* Further reduced top padding from 1rem to 0.5rem */
+  background: #F2F0EF;
+  padding: 1.5rem 2rem 2rem 2rem; /* Increased top padding by 0.5rem from 0.1rem to 0.6rem */
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
@@ -11,7 +11,7 @@
 .page-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.5rem 2rem 2rem 2rem;
   position: relative;
   z-index: 1;
 }
@@ -19,7 +19,7 @@
 .page-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1e3a8a;
+  color: #374151;
   margin-bottom: 1.5rem;
   text-align: center;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -78,11 +78,11 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .page-container {
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem 1rem;
   }
   
   .page-content {
-    padding: 1.5rem;
+    padding: 0.25rem 1.5rem 1.5rem 1.5rem;
   }
   
   .page-title {

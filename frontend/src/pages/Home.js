@@ -13,7 +13,8 @@ function Home() {
             alt="Wizard Programmer" 
             style={{ 
               maxWidth: '400px', 
-              width: '100%'
+              width: '100%',
+              mixBlendMode: 'multiply'
             }}
           />
         </div>

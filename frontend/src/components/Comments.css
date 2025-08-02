@@ -1,19 +1,19 @@
 /* Comments Section Styles */
 .comments-section {
-  margin-top: 1.5rem;
-  padding: 0;
-  background: white;
-  border-radius: 0;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+  background: transparent;
+  border-radius: 8px;
   box-shadow: none;
-  border: none;
+  border: 2px solid #374151;
 }
 
 .comments-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1e3a8a;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #1e3a8a;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #374151;
   padding-bottom: 0.5rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -22,7 +22,7 @@
 .auth-section {
   margin-bottom: 0.75rem;
   padding: 0.5rem;
-  background: white;
+  background: transparent;
   border-radius: 0;
   border: 1px solid #e5e7eb;
 }
@@ -53,7 +53,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #1e3a8a;
+  border: 2px solid #374151;
 }
 
 .user-name {
@@ -78,10 +78,18 @@
 
 /* Comment Form */
 .comment-form {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 0;
   padding-top: 0;
   border-top: none;
+}
+
+.signin-prompt {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 1rem;
 }
 
 .comment-textarea {
@@ -105,7 +113,7 @@
 }
 
 .submit-btn {
-  background: #1e3a8a;
+  background: #374151;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -118,7 +126,7 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #1e40af;
+  background: #1f2937;
 }
 
 .submit-btn:disabled {
@@ -142,7 +150,7 @@
 .comment {
   margin-bottom: 0.75rem;
   padding: 0;
-  background: white;
+  background: transparent;
   border-radius: 0;
   border: none;
   box-shadow: none;
@@ -151,7 +159,7 @@
 .comment.reply {
   margin-left: 1.5rem;
   margin-top: 0.5rem;
-  background: white;
+  background: transparent;
   border-left: 2px solid #e5e7eb;
   padding-left: 0.75rem;
 }
@@ -203,11 +211,11 @@
 }
 
 .edit-btn {
-  color: #1e3a8a;
+  color: #374151;
 }
 
 .edit-btn:hover {
-  color: #1e40af;
+  color: #1f2937;
 }
 
 .delete-btn {
@@ -292,7 +300,7 @@
 .reply-btn {
   background: none;
   border: none;
-  color: #1e3a8a;
+  color: #374151;
   cursor: pointer;
   font-size: 0.75rem;
   padding: 0;
@@ -301,14 +309,14 @@
 }
 
 .reply-btn:hover {
-  color: #1e40af;
+  color: #1f2937;
 }
 
 /* Reply Form */
 .reply-form {
   margin-top: 0.5rem;
   padding: 0.5rem;
-  background: white;
+  background: transparent;
   border-radius: 4px;
   border: 1px solid #e5e7eb;
 }
@@ -395,8 +403,60 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .comments-section {
-    padding: 0;
+    padding: 1rem;
     margin-top: 1rem;
+  }
+  
+  .comments-title {
+    font-size: 1.2rem;
+  }
+  
+  .comment-content p {
+    font-size: 0.8rem;
+  }
+  
+  .author-name {
+    font-size: 0.7rem;
+  }
+  
+  .comment-time {
+    font-size: 0.7rem;
+  }
+  
+  .action-btn {
+    font-size: 0.7rem;
+  }
+  
+  .reply-btn {
+    font-size: 0.7rem;
+  }
+  
+  .like-btn {
+    font-size: 0.7rem;
+  }
+  
+  .like-count {
+    font-size: 0.7rem;
+  }
+  
+  .comment-textarea {
+    font-size: 0.8rem;
+  }
+  
+  .reply-textarea {
+    font-size: 0.8rem;
+  }
+  
+  .edit-textarea {
+    font-size: 0.8rem;
+  }
+  
+  .submit-btn {
+    font-size: 0.8rem;
+  }
+  
+  .save-btn, .cancel-btn {
+    font-size: 0.7rem;
   }
   
   .comment-header {

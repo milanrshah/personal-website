@@ -1,0 +1,109 @@
+import React, { useState, useEffect } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from '../config';
+import './Auth.css';
+
+const Auth = () => {
+  const [user, setUser] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // Load user from localStorage on component mount
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    const savedToken = localStorage.getItem('token');
+    
+    if (savedUser && savedToken) {
+      setUser(JSON.parse(savedUser));
+      axios.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
+    }
+  }, []);
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const response = await axios.post('/api/auth/google', {
+        id_token: credentialResponse.credential
+      });
+
+      const { token, user: userInfo } = response.data;
+      
+      // Save to localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userInfo));
+      
+      // Set axios default header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      setUser(userInfo);
+    } catch (error) {
+      console.error('Google auth error:', error);
+      alert('Failed to sign in with Google');
+    }
+  };
+
+  const handleGoogleError = () => {
+    console.error('Google Sign-In was unsuccessful');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    delete axios.defaults.headers.common['Authorization'];
+    setUser(null);
+    setShowDropdown(false);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showDropdown && !event.target.closest('.user-dropdown')) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
+
+  return (
+    <div className="auth-navbar">
+      {!user ? (
+        <div className="google-signin-container">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap
+            theme="filled_white"
+            size="small"
+            type="icon"
+            shape="square"
+          />
+        </div>
+      ) : (
+        <div className="user-navbar">
+          <div className="user-dropdown">
+            <img 
+              src={user.picture || '/default-avatar.png'} 
+              alt={user.name}
+              className="user-avatar-navbar"
+              onClick={() => setShowDropdown(!showDropdown)}
+            />
+            {showDropdown && (
+              <div className="user-dropdown-menu">
+                <div className="user-dropdown-item">
+                  <span className="user-name-dropdown">{user.name}</span>
+                </div>
+                <button onClick={handleLogout} className="logout-btn-dropdown">
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Auth; 

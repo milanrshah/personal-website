@@ -15,7 +15,7 @@
 
 .tab-label {
   font-weight: 600;
-  color: #1e3a8a;
+  color: #374151;
   margin-bottom: 0;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -49,11 +49,11 @@
 }
 
 .tab-btn:hover {
-  color: #1e3a8a;
+  color: #1f2937;
 }
 
 .tab-btn.active {
-  color: #1e3a8a;
+  color: #1f2937;
 }
 
 .tab-btn.active::after {
@@ -63,11 +63,12 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #1e3a8a;
+  background-color: #1f2937;
 }
 
 .rankings-content {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .ranking-row {
@@ -87,7 +88,7 @@
 .ranking-number {
   width: 30px;
   font-weight: 600;
-  color: #1e3a8a;
+  color: #374151;
   margin-right: 1rem;
 }
 
@@ -109,7 +110,7 @@
 }
 
 .move-new {
-  color: #1e3a8a;
+  color: #374151;
   font-weight: 600;
 }
 
