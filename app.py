@@ -21,6 +21,13 @@ app = Flask(__name__)
 app.config.from_object(config)
 CORS(app, resources={r"/*": {"origins": config.CORS_ORIGINS}})
 
+# Add security headers to help with COOP
+@app.after_request
+def add_security_headers(response):
+    response.headers['Cross-Origin-Opener-Policy'] = 'same-origin-allow-popups'
+    response.headers['Cross-Origin-Embedder-Policy'] = 'unsafe-none'
+    return response
+
 # Database configuration using config
 DB_CONFIG = config.DATABASE_CONFIG
 
