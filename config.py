@@ -74,6 +74,7 @@ class ProductionConfig(Config):
         'https://main.d3oti3u8xtd2h3.amplifyapp.com',  # Your specific Amplify domain
         'https://www.milanrs.com',  # Your custom domain
         'https://milanrs.com',  # Your custom domain without www
+        'https://main.d3oti3u8xtd2h3.amplifyapp.com',  # Your Amplify domain
         '*'  # Allow all origins for testing (remove this in production)
     ]
 

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://milsh.onthewifi.com';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://54.166.206.80:5000';
 
 // Debug: Log the API base URL
 console.log('API Base URL:', API_BASE_URL);
