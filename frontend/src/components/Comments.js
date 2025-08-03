@@ -12,7 +12,7 @@ const Comments = ({ week }) => {
   const [editingComment, setEditingComment] = useState(null);
   const [editText, setEditText] = useState('');
 
-  // Load user from localStorage on component mount
+  // Load user from localStorage on component mount and listen for auth changes
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     const savedToken = localStorage.getItem('token');
@@ -21,6 +21,45 @@ const Comments = ({ week }) => {
       setUser(JSON.parse(savedUser));
       axios.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
     }
+
+    // Listen for storage changes (when user signs in/out from navbar)
+    const handleStorageChange = (e) => {
+      if (e.key === 'user' || e.key === 'token') {
+        const currentUser = localStorage.getItem('user');
+        const currentToken = localStorage.getItem('token');
+        
+        if (currentUser && currentToken) {
+          setUser(JSON.parse(currentUser));
+          axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
+        } else {
+          setUser(null);
+          delete axios.defaults.headers.common['Authorization'];
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also listen for custom auth events
+    const handleAuthChange = () => {
+      const currentUser = localStorage.getItem('user');
+      const currentToken = localStorage.getItem('token');
+      
+      if (currentUser && currentToken) {
+        setUser(JSON.parse(currentUser));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
+      } else {
+        setUser(null);
+        delete axios.defaults.headers.common['Authorization'];
+      }
+    };
+
+    window.addEventListener('authChange', handleAuthChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('authChange', handleAuthChange);
+    };
   }, []);
 
   const fetchComments = async () => {

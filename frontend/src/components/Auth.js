@@ -34,6 +34,9 @@ const Auth = () => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       setUser(userInfo);
+      
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event('authChange'));
     } catch (error) {
       console.error('Google auth error:', error);
       alert('Failed to sign in with Google');
@@ -50,6 +53,9 @@ const Auth = () => {
     delete axios.defaults.headers.common['Authorization'];
     setUser(null);
     setShowDropdown(false);
+    
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event('authChange'));
   };
 
   // Close dropdown when clicking outside
